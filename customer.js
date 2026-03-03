@@ -30,7 +30,7 @@ module.exports = (sequelize) => {
     last_update: {
       type: DataTypes.DATE
     },
-    last_active: {
+    active: {
       type: DataTypes.INTEGER
     }
   }, {
