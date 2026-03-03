@@ -97,6 +97,52 @@
 
             resultsDiv.innerHTML = table;
         };
+    
+        document.getElementById('customerSearchForm').onsubmit = async function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+        const params = new URLSearchParams(formData).toString();
+
+        const response = await fetch(`http://localhost:3000/customers/search?${params}`);
+        const customers = await response.json();
+
+        const resultsDiv = document.getElementById('customerResults');
+
+        if (customers.length === 0) {
+            resultsDiv.innerHTML = "<p>No customers found.</p>";
+            return;
+        }
+
+        let table = `
+            <table class="movie-table">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+        customers.forEach(customer => {
+            table += `
+                <tr>
+                    <td>${customer.first_name}</td>
+                    <td>${customer.last_name}</td>
+                    <td>${customer.email}</td>
+                </tr>
+            `;
+        });
+
+        table += `
+                </tbody>
+            </table>
+        `;
+
+        resultsDiv.innerHTML = table;
+    };
     </script>
 </body>
 </html>

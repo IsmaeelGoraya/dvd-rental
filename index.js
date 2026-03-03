@@ -46,6 +46,26 @@ sequelize.authenticate().then(() => {
       res.status(500).json({ error: 'Something went wrong' });
     }
   });
+    
+  app.get('/customers/search', async (req, res) => {
+    const { firstName, lastName, email } = req.query;
+  
+    try {
+      const customers = await Customer.findAll({
+        attributes: ['first_name', 'last_name', 'email'],
+        where: {
+          ...(firstName ? { first_name: { [Op.iLike]: `%${title}%` } } : {}),
+          ...(lastName ? { last_name: { [Op.iLike]: `%${title}%` } } : {}),
+          ...(email ? { email: email } : {})
+        }
+      });
+  
+      res.json(customers);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Something went wrong' });
+    }
+  });
 
   app.listen(3000, () => {
     console.log('Server is running on port 3000');
