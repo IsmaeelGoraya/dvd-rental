@@ -50,3 +50,19 @@ body {
     padding: 6px;
     margin: 5px 0;
   }
+
+  .forms-container {
+    display: flex;
+    gap: 40px;              /* space between forms */
+    align-items: flex-start;
+}
+
+.form-box {
+    width: 45%;
+}
+
+form {
+    background: #f4f4f4;
+    padding: 15px;
+    border-radius: 8px;
+}
