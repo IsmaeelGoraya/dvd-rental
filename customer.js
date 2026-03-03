@@ -35,6 +35,7 @@ module.exports = (sequelize) => {
     }
   }, {
     tableName: 'customer',
+    freezeTableName: true,
     timestamps: false
   });
 };
