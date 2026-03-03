@@ -66,3 +66,13 @@ form {
     padding: 15px;
     border-radius: 8px;
 }
+
+@media (max-width: 768px) {
+    .forms-container {
+        flex-direction: column;
+    }
+
+    .form-box {
+        width: 100%;
+    }
+}
