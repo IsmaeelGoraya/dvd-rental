@@ -2,6 +2,7 @@ const express = require('express');
 const { Sequelize, Op } = require('sequelize');
 const cors = require('cors');
 const defineFilm = require('./film');
+const defineCustomer = require('./customer');
 const app = express();
 app.use(cors());
 
@@ -11,12 +12,18 @@ const sequelize = new Sequelize('dvdrental', 'ismaeelshujaat', 'Password123!', {
 });
 
 const Film = defineFilm(sequelize);
+const Customer = defineCustomer(sequelize);
 
 sequelize.authenticate().then(() => {
 
   app.get('/films', async (req, res) => {
     const films = await Film.findAll();
     res.json(films);
+  });
+    
+  app.get('/customers', async (req, res) => {
+    const customers = await Customer.findAll();
+    res.json(customers);
   });
 
   app.get('/films/search', async (req, res) => {
