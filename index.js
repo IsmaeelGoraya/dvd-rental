@@ -1,8 +1,8 @@
 const express = require('express');
 const { Sequelize, Op } = require('sequelize');
 const cors = require('cors');
-const defineFilm = require('./film');
-const defineCustomer = require('./customer');
+const defineFilm = require('./models/film');
+const defineCustomer = require('./models/customer');
 const app = express();
 app.use(cors());
 
