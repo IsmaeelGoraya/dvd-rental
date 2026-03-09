@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const { Sequelize, Op } = require('sequelize');
 const cors = require('cors');
@@ -6,10 +7,16 @@ const defineCustomer = require('./models/customer');
 const app = express();
 app.use(cors());
 
-const sequelize = new Sequelize('dvdrental', 'ismaeelshujaat', 'Password123!', {
-  host: 'localhost',
-  dialect: 'postgres'
-});
+const sequelize = new Sequelize(
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
+  {
+    host: process.env.DB_HOST,
+    dialect: process.env.DB_DIALECT,
+    port: process.env.DB_PORT
+  }
+);
 
 const Film = defineFilm(sequelize);
 const Customer = defineCustomer(sequelize);
